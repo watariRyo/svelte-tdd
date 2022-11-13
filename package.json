@@ -6,7 +6,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "test-ci": "jest"    
   },
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",
