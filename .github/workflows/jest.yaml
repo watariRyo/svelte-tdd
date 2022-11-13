@@ -1,0 +1,21 @@
+# アクション名
+name: jest-CI
+
+# タイミング
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.16.x'
+      - name: yarn install
+        run: yarn install
+      - name: Run jest test
+        run: yarn test  
