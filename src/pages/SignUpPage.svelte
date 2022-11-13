@@ -2,6 +2,7 @@
     import Input from '../components/Input.svelte';
     import { _ } from "svelte-i18n"
     import { signup } from "../api/apiCalls"
+  import Spiner from '../components/Spiner.svelte';
 
     let disabled = true;
     let form = {
@@ -66,7 +67,7 @@
             <div class="text-center">
                 <button disabled={disabled || apiProgress} on:click|preventDefault={submit} class="btn btn-primary">
                     {#if apiProgress}
-                        <span class="spinner-border spinner-border-sm" role="status"></span>
+                        <Spiner />
                     {/if}
                     {$_("signUp")}
                 </button>

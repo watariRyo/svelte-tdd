@@ -13,7 +13,7 @@
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^5.0.1",
     "@rollup/plugin-node-resolve": "^11.0.0",
-    "C": "^5.16.5",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/svelte": "^3.2.2",
     "@testing-library/user-event": "^14.4.3",
     "babel-jest": "^29.2.1",
@@ -32,13 +32,17 @@
   "dependencies": {
     "axios": "0.21.1",
     "sirv-cli": "^2.0.0",
-    "svelte-i18n": "^3.4.0"
+    "svelte-i18n": "^3.4.0",
+    "svelte-routing": "^1.6.0"
   },
   "jest": {
     "transform": {
       "^.+\\.svelte$": "svelte-jester",
       "^.+\\.js$": "babel-jest"
     },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(svelte-routing)/)"
+    ],
     "setupFilesAfterEnv": [
       "./setupTest.js"
     ]
