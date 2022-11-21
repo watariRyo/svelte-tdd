@@ -4,5 +4,9 @@
 	"email": "Eメール",
 	"password": "パスワード",
 	"passwordRepeat": "パスワード確認",
-    "passwordMismatchValidation": "パスワードが不一致です"
+    "passwordMismatchValidation": "パスワードが不一致です",
+	"users": "ユーザー",
+	"nextPage": "次へ >",
+	"previousPage": "< 前へ",
+	"login": "ログイン"
 }
