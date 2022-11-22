@@ -23,29 +23,27 @@
 
 </script>
 
-<div class="card">
-    <Card>
-        <h3 slot="header">{$_("users")}</h3>
-        <ul class="list-group list-group-flush">
-            {#each page.content as user (user.id)}
-                <UserListItem {user} />
-            {/each}
-        </ul>    
-        <div slot="footer">
-            {#if pendingApiCall}
-            <Spinner size="normal" />
-            {:else}
-                {#if page.page > 0}
-                    <button class="btn btn-outline-secondary btn-sm float-left"
-                    in:fade
-                    on:click={() => loadData(page.page - 1)}>{$_("previousPage")}</button>
-                {/if}
-                {#if page.page < page.totalPages - 1}
-                    <button class="btn btn-outline-secondary btn-sm float-right"
-                    in:fade
-                    on:click={() => loadData(page.page + 1)}>{$_("nextPage")}</button>
-                {/if}
+<Card>
+    <h3 slot="header">{$_("users")}</h3>
+    <ul class="list-group list-group-flush">
+        {#each page.content as user (user.id)}
+            <UserListItem {user} />
+        {/each}
+    </ul>    
+    <div slot="footer">
+        {#if pendingApiCall}
+        <Spinner size="normal" />
+        {:else}
+            {#if page.page > 0}
+                <button class="btn btn-outline-secondary btn-sm float-left"
+                in:fade
+                on:click={() => loadData(page.page - 1)}>{$_("previousPage")}</button>
             {/if}
-        </div>
-    </Card>
-</div>
+            {#if page.page < page.totalPages - 1}
+                <button class="btn btn-outline-secondary btn-sm float-right"
+                in:fade
+                on:click={() => loadData(page.page + 1)}>{$_("nextPage")}</button>
+            {/if}
+        {/if}
+    </div>
+</Card>

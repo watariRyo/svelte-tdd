@@ -33,6 +33,9 @@ const server = setupServer(
             email: "user1@mail.com",
             image: null
         }))
+    }),
+    rest.post("/api/1.0/auth", (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json({ id:5, username: "user5"}))
     })
 );
 
@@ -128,21 +131,49 @@ describe("Routing", () => {
         expect(screen.queryByTestId("user-page")).toBeInTheDocument()
     })
     describe("Login", () => {
-        xit("redirects to homepage after successfull login", async() => {
-            server.use(
-                rest.post("/api/1.0/auth", (req, res, ctx) => {
-                    return res(ctx.status(200), ctx.json({ username: "user5"}))
-                })
-            )
+
+        let emailInput, passwordInput, button;
+
+        const setupFillLogin = async() => {
             setup("/login")
-            const emailInput = screen.queryByLabelText("E-mail")
-            const passwordInput = screen.queryByLabelText("Password")
-            const button = screen.queryByRole("button", { name: "Login"})
+            emailInput = screen.queryByLabelText("E-mail")
+            passwordInput = screen.queryByLabelText("Password")
+            button = screen.queryByRole("button", { name: "Login"})
             await userEvent.type(emailInput, "user5@mail.com")
             await userEvent.type(passwordInput, "P4ssword")
-            await userEvent.click(button);  
-            const homepage = screen.findByTestId("home-page")
+        }
+
+        xit("redirects to homepage after successfull login", async() => {
+            await setupFillLogin()
+            await userEvent.click(button);
+            const homepage = await screen.findByText("home-page")
+            // screen.debug()だと存在するがエラーになる
             expect(homepage).toBeInTheDocument();
+        })
+        xit("hides login and sign up from navbar after successfull login", async() => {
+            await setupFillLogin()
+            const loginLink = screen.queryByRole("link", { name: "Login" })
+            const signUpLink = screen.queryByRole("link", { name: "Sign Up" })
+            await userEvent.click(button);
+            await screen.findByText("home-page")
+            expect(loginLink).not.toBeInTheDocument();
+            expect(signUpLink).not.toBeInTheDocument();
+        })
+        xit("displays My Profile link on navbar after successful login", async() => {
+            await setupFillLogin();
+            await userEvent.click(button)
+            await screen.findByTestId("home-page")
+            const myProfileLink = screen.queryByRole("link", { name: "My Profile" })
+            expect(myProfileLink).toBeInTheDocument()
+        })
+        xit("displays User Page with logged in user id in url after clicking", async() => {
+            await setupFillLogin();
+            await userEvent.click(button)
+            await screen.findByTestId("home-page")
+            const myProfileLink = screen.queryByRole("link", { name: "My Profile" })
+            await userEvent.click(myProfileLink)
+            expect(screen.queryByTestId("user-page")).toBeInTheDocument()
+            expect(window.location.pathname.endsWith("/user/5")).toBeTruthy();
         })
     })
 })

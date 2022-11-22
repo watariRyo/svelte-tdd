@@ -1,28 +1,18 @@
 <script>
-  import LanguageSelector from './components/LanguageSelector.svelte';
-  import HomePage from './pages/HomePage.svelte';
-  import LoginPage from './pages/LoginPage.svelte';
-  import SignUpPage from './pages/SignUpPage.svelte';
-  import UserPage from './pages/UserPage.svelte';
-  import { _ } from "svelte-i18n"
-  import { Router, Route, Link } from "svelte-routing"
-  import AccountActivationPage from './pages/AccountActivationPage.svelte';
+	import LanguageSelector from './components/LanguageSelector.svelte';
+	import HomePage from './pages/HomePage.svelte';
+	import LoginPage from './pages/LoginPage.svelte';
+	import SignUpPage from './pages/SignUpPage.svelte';
+	import UserPage from './pages/UserPage.svelte';
+	import { _ } from "svelte-i18n"
+	import { Router, Route } from "svelte-routing"
+	import AccountActivationPage from './pages/AccountActivationPage.svelte';
+	import NavBar from './components/NavBar.svelte';
 
 </script>
 
 <Router url={window.location.pathname}>
-	<div class="bg-light shadow-sm mb-3">
-		<nav class="navbar navbar-expand container navbar-light">
-			<Link class="navbar-brand" to="/" title="Home">
-				<img src="/assets/hoaxify.png" width=60 alt="Hoaxify" data-testid="Hoaxify"/>
-				Hoaxify
-			</Link>
-			<ul class="navbar-nav ml-auto">
-				<Link class="nav-link" to="/signup">{$_("signUp")}</Link>
-				<Link class="nav-link" to="/login">Login</Link>
-			</ul>
-		</nav>
-	</div>
+	<NavBar />
 	
 	<div class="container">
 		<Route path="/">
