@@ -7,7 +7,7 @@
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
     "test": "jest --watchAll",
-    "test-ci": "jest"    
+    "test-ci": "jest"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "axios": "0.21.1",
+    "secure-ls": "^1.2.6",
     "sirv-cli": "^2.0.0",
     "svelte-i18n": "^3.4.0",
     "svelte-routing": "^1.6.0"

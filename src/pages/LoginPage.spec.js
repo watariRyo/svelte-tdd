@@ -132,6 +132,21 @@ describe("Login Page", () => {
             await userEvent.type(passwordInput, "hoge")
             expect(errorMessage).not.toBeInTheDocument();
         })
+        xit("stores id, username, and image in ls", async() => {
+            server.use(
+                rest.post("/api/1.0/auth", async(req, res, ctx) => {
+                    requestBody = await req.json();
+                    counter += 1;
+                    return res(ctx.status(200), ctx.json({ id: 5, username: "user5", image: null, token: "asdfg"}));
+                })
+            );
+            await setup();
+            await userEvent.click(button)
+            // const spinner = screen.queryByRole("status")
+            // await waitForElementToBeRemoved(spinner)
+            const storedState = storage.getItem("auth")
+            expect(storedState.header).toBe("Bearer asdfg")
+        })
     })
     describe("Internatinalization", () => {
         beforeEach(() => {

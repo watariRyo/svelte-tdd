@@ -4,9 +4,8 @@
     import Spiner from "../components/Spiner.svelte";
     export let id;
 
-    let user = {};
-
     let apiCall = getUserById(id)
+
 </script>
 
 <div data-testid="user-page">

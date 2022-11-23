@@ -29,7 +29,11 @@
         apiProgress = true
         try {
             const response = await login({email, password});
-            auth.set({isLoggedIn: true, id: response.data.id})
+            $auth = {
+                ...response.data, 
+                header: `Bearer ${response.data.token}`,
+                isLoggedIn: true
+            }
             navigate("/")
         } catch (error) {
             failMessage = error.response.data.message
